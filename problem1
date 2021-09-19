@@ -1,0 +1,143 @@
+#include <iostream>
+using namespace std;
+class External1;
+class Internal1    
+  {
+     private:
+       int math;
+       int oops;
+       int SE;
+       int DS;
+       int tinternal1;
+     
+     public:
+       Internal1()
+       {
+           math = 0;
+           oops = 0;
+           SE = 0;
+           DS = 0;
+           tinternal1 = 0;
+       }
+       void marks_internal1()
+       {
+           cout << "Internal Marks (out of 50):";
+           cout << "\nEnter Marks of Math: ";
+           cin >> math;
+           cout << "Enter Marks of OPP: ";
+           cin >> oops;
+           cout << "Enter Marks of SE: ";
+           cin >> SE;
+           cout << "Enter Marks of DS: ";
+           cin >> DS;
+       }
+       
+       friend void operator+(Internal1,External1) ;    
+  };
+  
+class External1 
+  {
+     private:
+       int math;
+       int oops;
+       int SE;
+       int DS;
+       int texternal1;
+     
+     public:
+     External1()
+       {
+           math = 0;
+           oops = 0;
+           SE = 0;
+           DS = 0;
+           texternal1 = 0;
+       }
+       void marks_external1()
+       {
+           cout << "\nExternal Marks (out of 50):";
+           cout << "\nEnter Marks of Math: ";
+           cin >> math;
+           cout << "Enter Marks of OPP: ";
+           cin >> oops;
+           cout << "Enter Marks of SE: ";
+           cin >> SE;
+           cout << "Enter Marks of DS: ";
+           cin >> DS;
+       }
+       
+       friend void operator+(Internal1,External1);    
+  };
+  
+void operator+(Internal1 ob1, External1 ob2)          
+{
+    float tmath,toops,tSE,tDS,per,flag;
+    
+    tmath = ob1.math + ob2.math;               
+    toops = ob1.oops + ob2.oops;
+    tSE   = ob1.SE   + ob2.SE;
+    tDS   = ob1.DS   + ob2.DS;
+    flag  = 0;
+    
+    cout << "\nTotal Marks Subject wise (out of 100):";
+    cout << "\nTotal Marks of Math: " << tmath;
+    if (tmath >= 50)
+    {
+      cout << "\nPassed";
+    }
+    else
+    {
+      cout << "\nFailed";flag = 1;
+    }
+    cout << "\nTotal Marks of OPP: " << toops;
+    if (toops >= 50)
+    {
+      cout << "\nPassed";
+    }
+    else
+    {
+      cout << "\nFailed";flag = 1;
+    }
+    cout << "\nTotal Marks of SE: " << tSE;
+    if (tSE >= 50)
+    {
+      cout << "\nPassed";
+    }
+    else
+    {
+      cout << "\nFailed";flag = 1;
+    }
+    cout << "\nTotal Marks of DS: " << tDS;
+    if (tDS >= 50)
+    {
+      cout << "\nPassed";
+    }
+    else
+    {
+      cout << "\nFailed";flag = 1;
+    }
+    ob1.tinternal1 = ob1.math + ob1.oops + ob1.SE + ob1.DS;      
+    ob2.texternal1 = ob2.math + ob2.oops + ob2.SE + ob2.DS;
+    cout << "\n\nTotal Marks of student: " << ob1.tinternal1 + ob2.texternal1 << "/400\n";
+    per = ((tmath+toops+tSE+tDS)/400)*100;
+    
+    
+    if (flag == 1)
+    {
+      cout << "Student has failed in at least one subject.";
+    }
+    else
+    {
+      cout << "Total Percentage of student: " << per << "%" ;
+    }
+}
+
+int main()
+{
+    Internal1 obj1;
+    External1 obj2;
+    obj1.marks_internal1();
+    obj2.marks_external1();
+    operator+(obj1,obj2);          
+
+}
