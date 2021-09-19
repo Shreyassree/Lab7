@@ -1,0 +1,67 @@
+#include<iostream>
+using namespace std;
+
+class Doctor
+{
+    public:
+      string name, area;
+      void inputData();
+      void displayData();
+      friend bool operator < (Doctor ob1, Doctor ob2);
+};
+
+void Doctor :: inputData()
+    {
+        cout << "Doctor's Name: ";
+        cin >> name;
+        cout << "Area: ";
+        cin >> area;
+    }
+  
+void Doctor :: displayData()
+    {
+        cout <<name<<"\t\t\t"<<area<<endl;
+    }
+  
+bool operator < (Doctor ob1, Doctor ob2)
+    {
+      if (ob1 < ob2)
+        return true;
+      else
+        return false;
+    }
+    
+int main()
+{
+    int n;
+    Doctor ob1[n];
+    
+    cout << "Enter no. of doctors: ";
+    cin >> n;
+
+    for (int i=0; i<n; i++)
+    {
+        ob1[i].inputData();
+    } 
+  
+   for (int i=0; i<n; i++)
+    {
+        for (int j=i+1; j<n; j++)
+        {
+            if (operator <(ob1[i].area, ob1[j].area))
+            {}
+            else
+                {
+                   swap(ob1[j],ob1[i]);
+                }
+        }
+    }
+  
+    cout << "\nDoctor's Name: "<<"\t\t"<<"Area:"<<endl;
+    for (int i=0; i<n; i++)
+    {
+        ob1[i].displayData();
+    } 
+    
+    return 0;
+}
